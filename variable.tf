@@ -6,11 +6,11 @@ variable "resourcename" {
   default = "k8s-resourcestest"
 }
 variable "subnet_address_space" {
-  type = list
+  type = string
 default = "10.0.0.0/16"
 }
 variable "subnet_address_prefixes" {
-  type = list
+  type = string
   default = "10.0.1.0/24"
 }
 variable "subscription_id" {
