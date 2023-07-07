@@ -5,10 +5,6 @@ provider "azurerm" {
   tenant_id       = var.tenant_id
 features {}
 }
-service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
-  }
 terraform {
 backend "azurerm" {
 resource_group_name = "Azurevms"
