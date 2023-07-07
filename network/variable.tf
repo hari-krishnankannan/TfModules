@@ -3,7 +3,7 @@ variable "location" {
   type    = string
 }
 
-variable "resource_group_name" {
+variable "resourcename" {
   type = string
 }
 
