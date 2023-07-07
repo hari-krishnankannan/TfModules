@@ -4,6 +4,11 @@ variable "location" {
 }
 variable "resourcename" {
   default = "k8s-resourcestest"
+type    = string
+}
+variable "vnet_name" {
+  default = "k8s-vnet"
+  type    = string
 }
 variable "subnet_address_space" {
   type = string
