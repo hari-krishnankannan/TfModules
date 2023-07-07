@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "k8s" {
   location = var.location
 }
 module "network" {
-  source    = "../network"
+  source    = "./network"
   vnet_name =   var.vnet_name
   resource_group_name     = var.resource_group_name
   subnet_address_space    = [var.subnet_address_space]
