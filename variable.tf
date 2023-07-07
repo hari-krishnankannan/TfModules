@@ -2,7 +2,7 @@ variable "location" {
   default = "centralindia"
   type    = string
 }
-variable "resourcename" {
+variable "resource_group_name" {
   default = "k8s-resourcestest"
 type    = string
 }
