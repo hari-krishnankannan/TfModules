@@ -4,7 +4,6 @@ variable "location" {
 }
 
 variable "resourcename" {
-default = k8s-resourcestest
   type = string
 
 }
