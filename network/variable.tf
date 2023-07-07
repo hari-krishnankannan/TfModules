@@ -5,7 +5,6 @@ variable "location" {
 
 variable "resourcename" {
   type = string
-default = k8s-resourcestest
 }
 
 variable "vnet_name" {
