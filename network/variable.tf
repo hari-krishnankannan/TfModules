@@ -1,4 +1,4 @@
-variable "resource_group_location" {
+variable "location" {
   default = "centralindia"
   type    = string
 }
