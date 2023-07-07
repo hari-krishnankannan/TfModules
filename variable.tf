@@ -3,7 +3,7 @@ variable "resource_group_location" {
   type    = string
 }
 variable "resourcename" {
-  default = "k8s-resources"
+  default = "k8s-resourcestest"
 }
 variable "subnet_address_space" {
   type = list
