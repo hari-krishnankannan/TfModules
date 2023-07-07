@@ -5,7 +5,10 @@ provider "azurerm" {
   tenant_id       = var.tenant_id
 features {}
 }
-
+service_principal {
+    client_id     = var.client_id
+    client_secret = var.client_secret
+  }
 terraform {
 backend "azurerm" {
 resource_group_name = "Azurevms"
@@ -14,10 +17,6 @@ container_name = "statefile"
 key = "ei5+DK57QOuIYBJCXra1Q7Q0ZIgBPvkKi53ODWckTE5+3E+a4aYQNjFQPGUz5CFooKGXmhGG8mZl+AStL8xSww=="
 }
 }
-service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
-  }
 resource "azurerm_resource_group" "k8s" {
   name     = var.resourcename
   location = var.location
