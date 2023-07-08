@@ -18,6 +18,14 @@ variable "subnet_address_prefixes" {
   type = string
   default = "10.0.1.0/24"
 }
+variable "cluster_name" {
+type = string
+ default = aks1
+}
+variable "vm_size"{
+type = string
+default = "Standard_D2_v2"
+}
 variable "subscription_id" {
   default = "b3c7ce23-4463-41af-b0ee-2aad6de340b9"
 }
