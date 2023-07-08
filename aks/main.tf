@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = var.dnspreffix
 default_node_pool {
-    name       = var.node_pool_name
+    name       =  default
     node_count = var.agentnode
     vm_size    = var.size
     vnet_subnet_id  = var.subnet_id
