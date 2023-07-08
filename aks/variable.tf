@@ -2,8 +2,8 @@
 variable "resource_group_name" {
   type = string
 }
-variable "clustername" {
-  default = "kubernetes-aks1"
+variable "cluster_name" {
+type = string
 }
 variable "location" {
   type = string
@@ -11,8 +11,8 @@ variable "location" {
 variable "dnspreffix" {
   default = "kubecluster"
 }
-variable "size" {
-  default = "Standard_D2_v2"
+variable "vm_size" {
+ type  = string
 }
 variable "agentnode" {
   default = "1"
