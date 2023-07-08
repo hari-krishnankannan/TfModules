@@ -26,7 +26,6 @@ variable "subnet_id" {
 }
 variable "node_pool_name" {
   type = string
-default = default
 }
 variable "dns_service_ip" {
   type = string
