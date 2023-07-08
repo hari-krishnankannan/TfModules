@@ -6,6 +6,10 @@ variable "resource_group_name" {
   default = "k8s-resourcestest"
 type    = string
 }
+variable "node_pool_name" {
+type = string
+default = k8s
+}
 variable "vnet_name" {
   default = "k8s-vnet"
   type    = string
@@ -30,7 +34,4 @@ variable "client_secret" {
 variable "tenant_id" {
   default = "2d281bb5-1697-4054-99e8-8ad9ff83402b"
 }
-variable "node_pool_name" {
-default = k8s
-type = string
-}
+
