@@ -16,3 +16,7 @@ network_profile {
     dns_service_ip = var.dns_service_ip
   }
 }
+service_principal {
+    client_id     = var.client_id
+    client_secret = var.client_secret
+  }
