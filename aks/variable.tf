@@ -21,7 +21,7 @@ variable "network_plugin" {
   default = "azure"
   type    = string
 }
-variable "subnet_id" {
+variable "vnet_subnet_id" {
   type = string
 }
 variable "dns_service_ip" {
