@@ -25,3 +25,14 @@ resource_group_name = azurerm_resource_group.k8s.name
   subnet_address_prefixes = [var.subnet_address_prefixes]
 }
 
+module "aks" {
+  source              = "./aks"
+  resource_group_name = azurerm_resource_group.k8s.name
+  location            = azurerm_resource_group.k8s.location
+  cluster_name        = var.cluster_name
+  vm_size             = var.vm_size
+  node_pool_name      = var.node_pool_name
+  subnet_id           = module.network.subnet_id
+  service_cidr        = var.service_cidr
+  dns_service_ip      = var.dns_service_ip
+}
