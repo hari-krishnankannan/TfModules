@@ -26,6 +26,14 @@ variable "vm_size"{
 type = string
 default = "Standard_D2_v2"
 }
+variable "dns_service_ip" {
+  type = string
+  default = "10.0.2.10"
+}
+variable "service_cidr" {
+  type = string
+  default = "10.0.2.0/24"
+}
 variable "subscription_id" {
   default = "b3c7ce23-4463-41af-b0ee-2aad6de340b9"
 }
