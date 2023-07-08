@@ -27,6 +27,8 @@ resource_group_name = azurerm_resource_group.k8s.name
 
 module "aks" {
   source              = "./aks"
+ client_id     = var.client_id
+ client_secret = var.client_secret
   resource_group_name = azurerm_resource_group.k8s.name
   location            = azurerm_resource_group.k8s.location
   cluster_name        = var.cluster_name
