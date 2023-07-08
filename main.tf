@@ -29,8 +29,8 @@ module "aks" {
   source              = "./aks"
   resource_group_name = azurerm_resource_group.k8s.name
   location            = azurerm_resource_group.k8s.location
-  cluster_name        = var.clustername
-  vm_size             = var.size
+  cluster_name        = var.cluster_namename
+  vm_size             = var.vm_size
   subnet_id           = module.network.subnet_id
   service_cidr        = var.service_cidr
   dns_service_ip      = var.dns_service_ip
