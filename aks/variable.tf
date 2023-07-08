@@ -35,8 +35,8 @@ variable "network_policy" {
   type    = string
 }
 variable "client_id" {
-  default = "892c5683-828c-45f8-95cb-e112a70d5bd2"
+  type    = string
 }
 variable "client_secret" {
-  default = "_AK8Q~DuRTBorGh23XRZH5NQAbDWi.S-FWWrhbfi"
+  type    = string
 }
