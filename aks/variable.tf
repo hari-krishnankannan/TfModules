@@ -26,11 +26,9 @@ variable "vnet_subnet_id" {
 }
 variable "dns_service_ip" {
   type = string
-  default = "10.0.2.10"
 }
 variable "service_cidr" {
   type = string
-  default = "10.0.2.0/24"
 }
 variable "network_policy" {
   default = "azure"
