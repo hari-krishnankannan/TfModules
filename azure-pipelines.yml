@@ -16,7 +16,7 @@ steps:
     backendAzureRmSubscriptionId: 'b3c7ce23-4463-41af-b0ee-2aad6de340b9'
     backendAzureRmResourceGroupName: 'Azurevms'
     backendAzureRmStorageAccountName: 'mystatefiles'
-    backendAzureRmContainerName: 'statefile'
+    backendAzureRmContainerName: 'new'
     backendAzureRmKey: 'ei5+DK57QOuIYBJCXra1Q7Q0ZIgBPvkKi53ODWckTE5+3E+a4aYQNjFQPGUz5CFooKGXmhGG8mZl+AStL8xSww=='
     allowTelemetryCollection: false
     
