@@ -6,10 +6,6 @@ variable "resource_group_name" {
   default = "k8s-resourcestest"
 type    = string
 }
-variable "node_pool_name" {
-type = string
-default = k8s
-}
 variable "vnet_name" {
   default = "k8s-vnet"
   type    = string
