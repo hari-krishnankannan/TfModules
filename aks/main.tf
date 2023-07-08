@@ -7,7 +7,7 @@ default_node_pool {
     name       =  default
     node_count = var.agentnode
     vm_size    = var.vm_size
-    vnet_subnet_id  = azurerm_subnet.k8s.id
+    vnet_subnet_id  = var.vnet_subnet_id
   }
 network_profile {
     network_plugin = var.network_plugin
