@@ -31,7 +31,7 @@ module "aks" {
   location            = azurerm_resource_group.k8s.location
   cluster_name        = var.cluster_name
   vm_size             = var.vm_size
-  subnet_id           = module.network.k8s.id
+  vnet_subnet_id       = module.network.subnet.k8s.id
   service_cidr        = var.service_cidr
   dns_service_ip      = var.dns_service_ip
 }
