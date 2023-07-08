@@ -1,4 +1,8 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
+service_principal {
+    client_id     = var.client_id
+    client_secret = var.client_secret
+  }
   name                = var.cluster_name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -16,7 +20,4 @@ network_profile {
     dns_service_ip = var.dns_service_ip
   }
 }
-service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
-  }
+
