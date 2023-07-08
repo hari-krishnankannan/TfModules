@@ -19,7 +19,7 @@ steps:
     backendAzureRmContainerName: 'statefile'
     backendAzureRmKey: 'ei5+DK57QOuIYBJCXra1Q7Q0ZIgBPvkKi53ODWckTE5+3E+a4aYQNjFQPGUz5CFooKGXmhGG8mZl+AStL8xSww=='
     allowTelemetryCollection: false
-    -lock=false
+    
 
 - task: TerraformCLI@0
   inputs:
