@@ -31,6 +31,6 @@ variable "tenant_id" {
   default = "2d281bb5-1697-4054-99e8-8ad9ff83402b"
 }
 variable "node_pool_name" {
-  type = string
-default = default
+default = default  
+type = string
 }
