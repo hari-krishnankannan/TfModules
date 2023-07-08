@@ -24,9 +24,6 @@ variable "network_plugin" {
 variable "subnet_id" {
   type = string
 }
-variable "node_pool_name" {
-  type = string
-}
 variable "dns_service_ip" {
   type = string
   default = "10.0.2.10"
