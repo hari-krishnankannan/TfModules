@@ -26,6 +26,7 @@ resource_group_name = azurerm_resource_group.k8s.name
    }
 data "subnet" "subnet" {
 subnetid=  module.network.subnet.k8s.id
+}
 
 module "aks" {
   source              = "./aks"
