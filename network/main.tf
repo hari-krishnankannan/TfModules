@@ -9,4 +9,5 @@ resource "azurerm_subnet" "k8s" {
   resource_group_name              =  var.resource_group_name
   virtual_network_name             = azurerm_virtual_network.k8s.name
   address_prefixes                 = var.subnet_address_prefixes
+  vnet_subnet_id                   = azurerm_subnet.k8s.id
 }
