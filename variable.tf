@@ -20,7 +20,7 @@ variable "subnet_address_prefixes" {
 }
 variable "cluster_name" {
 type = string
- default = aks1
+ default = "aks1"
 }
 variable "vm_size"{
 type = string
