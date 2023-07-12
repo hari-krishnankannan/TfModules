@@ -1,13 +1,13 @@
 provider "azurerm" {
 
 data "azurerm_client_config" "current"{
-
 }
   subscription_id = data.azurerm_client_config.current.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
   tenant_id       = var.tenant_id
 features {}
+}
 }
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
