@@ -1,19 +1,58 @@
-
-data "azuread_application" "sp" {
-  display_name = "azure-cli-2023-06-19-06-50-33"
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+data "azurerm_key_vault" "secret"{
+  name                = "myscrets"
+  resource_group_name = "Azurevms"
+}
+data "azurerm_key_vault_secret" "id" {
+  name         = "clientid"
+  key_vault_id = data.azurerm_key_vault.secret.id
 }
 
-data "azuread_service_principal" "sp" {
-  application_id = data.azuread_application.sp.application_id
-  object_id    = data.azuread_application.sp.object_id
-  directory_id   = data.azuread_application.sp.tenant_id
+output "client" {
+
+value = data.azurerm_key_vault_secret.id.value
 }
 
+data "azurerm_key_vault_secret" "clientS" {
+  name         = "clientsecret"
+     key_vault_id = data.azurerm_key_vault.secret.id
+}
+
+output "clientSecrets" {
+
+value = data.azurerm_key_vault_secret.clientS.value
+}
+
+data "azurerm_key_vault_secret" "subscriptionID" {
+  name         = "subscriptionid"
+     key_vault_id = data.azurerm_key_vault.secret.id
+}
+
+output "Subid" {
+
+value = data.azurerm_key_vault_secret.subscriptionID.value
+}
+
+data "azurerm_key_vault_secret" "tenantids" {
+  name       = "tenantid"
+    key_vault_id = data.azurerm_key_vault.secret.id
+}
+output "tenid" {
+
+value = data.azurerm_key_vault_secret.tenantids.value
+}
 provider "azurerm" {
-  subscription_id = var.subscription_id
-  client_id       = data.azuread_service_principal.sp.application_id
-  client_secret   = var.client_secret
-  tenant_id       = data.azuread_service_principal.sp.directory_id
+  subscription_id = "$(data.azurerm_key_vault_secret.Subid)"
+  client_id       = "$(data.azurerm_key_vault_secret.clientSecrets)"
+  client_secret   = "$(data.azurerm_key_vault_secret.client)"
+  tenant_id       = "$(data.azurerm_key_vault_secret.tenid)"
 features {}
 }
 resource "azurerm_resource_group" "k8s" {
@@ -27,16 +66,3 @@ resource_group_name = azurerm_resource_group.k8s.name
    subnet_address_space    = [var.subnet_address_space]
   subnet_address_prefixes = [var.subnet_address_prefixes]
    }
-
-module "aks" {
-  source              = "./aks"
- client_id     = var.client_id
- client_secret = var.client_secret
-  resource_group_name = azurerm_resource_group.k8s.name
-  location            = azurerm_resource_group.k8s.location
-  cluster_name        = var.cluster_name
-  vm_size             = var.vm_size
-   vnet_subnet_id     =  module.network.subnet_id
-   service_cidr        = var.service_cidr
-  dns_service_ip      = var.dns_service_ip
-}
