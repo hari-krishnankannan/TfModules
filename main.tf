@@ -12,7 +12,7 @@ data "azurerm_key_vault" "secret"{
 }
 data "azurerm_key_vault_secret" "id" {
   name         = "clientid"
-  key_vault_id = data.azurerm_key_vault.key_vault_id
+  key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 output "client" {
@@ -22,7 +22,7 @@ value = data.azurerm_key_vault_secret.id.value
 
 data "azurerm_key_vault_secret" "clientS" {
   name         = "clientsecret"
-   key_vault_id = data.azurerm_key_vault.key_vault_id
+     key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 output "clientSecrets" {
@@ -32,7 +32,7 @@ value = data.azurerm_key_vault_secret.clientS.value
 
 data "azurerm_key_vault_secret" "subscriptionID" {
   name         = "subscriptionid"
-   key_vault_id = data.azurerm_key_vault.key_vault_id
+     key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 output "Subid" {
@@ -42,7 +42,7 @@ value = data.azurerm_key_vault_secret.subscriptionID.value
 
 data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
-   key_vault_id = data.azurerm_key_vault.key_vault_id
+    key_vault_id = data.azurerm_key_vault.secret.id
 }
 output "tenid" {
 
