@@ -6,7 +6,6 @@ terraform {
     }
   }
 }
-provider "azurerm" {
 
 data "azurerm_key_vault" "secret"{
   name                = "myscrets"
@@ -32,11 +31,11 @@ data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
   key_vault_id = data.azurerm_key_vault.secret.id
 }
-
-  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionID.value)"
-  client_id       = "$(data.azurerm_key_vault_secret.id.value)"
-  client_secret   = "$(data.azurerm_key_vault_secret.clientS.value)"
-  tenant_id       = "$(data.azurerm_key_vault_secret.tenantids.value)"
+provider "azurerm" {
+  subscription_id = data.azurerm_key_vault_secret.subscriptionID.value
+  client_id       = data.azurerm_key_vault_secret.id.value
+  client_secret   = data.azurerm_key_vault_secret.clientS.value
+  tenant_id       = data.azurerm_key_vault_secret.tenantids.value
 features {}
 }
 resource "azurerm_resource_group" "k8s" {
