@@ -10,12 +10,6 @@ data "azurerm_key_vault" "secret"{
   name                = "myscrets"
   resource_group_name = "Azurevms"
 }
-
-output "key_vault_id" {
-
-value = data.azurerm_key_vault.secret.id
-}
-
 data "azurerm_key_vault_secret" "id" {
   name         = "clientid"
   key_vault_id = data.azurerm_key_vault.key_vault_id
