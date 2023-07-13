@@ -1,5 +1,4 @@
 provider "azurerm" {
-features {}
 
 data "azurerm_key_vault" "secret"{
   name                = "myscrets"
@@ -53,7 +52,7 @@ value = data.azurerm_key_vault_secret.tenantids.value
   client_id       = data.azurerm_key_vault_secret.client
   client_secret   = data.azurerm_key_vault_secret.clientSecrets
   tenant_id       = data.azurerm_key_vault_secret.tenid
-}
+
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
   location = var.location
@@ -65,3 +64,4 @@ resource_group_name = azurerm_resource_group.k8s.name
    subnet_address_space    = [var.subnet_address_space]
   subnet_address_prefixes = [var.subnet_address_prefixes]
    }
+}
