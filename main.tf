@@ -1,26 +1,5 @@
 provider "azurerm" {
 
-data "azurerm_key_vault" "secrets"{
-  name                = "myscrets"
-  resource_group_name = "Azurevms"
-}
-
-data "azurerm_key_vault_secret" "id" {
-  name         = "clientid"
-  key_vault_uri = "https://myscrets.vault.azure.net/"
-}
-data "azurerm_key_vault_secret" "Secret" {
-  name         = "clientSecret"
-  key_vault_uri = "https://myscrets.vault.azure.net/"
-}
-data "azurerm_key_vault_secret" "subscription" {
-  name         = "subscriptionid"
-  key_vault_uri = "https://myscrets.vault.azure.net/"
-}
-data "azurerm_key_vault_secret" "tenant" {
-  name         = "tenantid"
-  key_vault_uri = "https://myscrets.vault.azure.net/"
-}
   subscription_id = "https://myscrets.vault.azure.net/secrets/subscriptionid/1114b528da72481a8852a19b505dfb0d"
   client_id       = "https://myscrets.vault.azure.net/secrets/clientid/e5d81d51788a4daf8e64e2343df79732"
   client_secret   = "https://myscrets.vault.azure.net/secrets/clientsecret/215d7086e31942919636bd190a668d7e"
