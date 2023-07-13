@@ -6,6 +6,9 @@ terraform {
     }
   }
 }
+provider "azurerm" {
+features {}
+}
 data "azurerm_key_vault" "secret"{
   name                = "myscrets"
   resource_group_name = "Azurevms"
@@ -48,13 +51,10 @@ output "tenid" {
 
 value = data.azurerm_key_vault_secret.tenantids.value
 }
-provider "azurerm" {
   subscription_id = "$(data.azurerm_key_vault_secret.Subid)"
   client_id       = "$(data.azurerm_key_vault_secret.clientSecrets)"
   client_secret   = "$(data.azurerm_key_vault_secret.client)"
   tenant_id       = "$(data.azurerm_key_vault_secret.tenid)"
-features {}
-}
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
   location = var.location
