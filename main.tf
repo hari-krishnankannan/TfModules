@@ -1,5 +1,3 @@
-provider "azurerm" {
-
 data "azurerm_key_vault" "secret"{
   name                = "myscrets"
   resource_group_name = "Azurevms"
@@ -24,7 +22,7 @@ data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
   vault_uri = "https://myscrets.vault.azure.net/"
 }
-
+provider "azurerm" {
   subscription_id = "$(data.azurerm_key_vault_secret.subscriptionID.value)"
   client_id       = "$(data.azurerm_key_vault_secret.id.value)"
   client_secret   = "$(data.azurerm_key_vault_secret.clientS.value)"
