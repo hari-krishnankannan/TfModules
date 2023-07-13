@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+provider "azurerm" {
+
 data "azurerm_key_vault" "secret"{
   name                = "myscrets"
   resource_group_name = "Azurevms"
@@ -22,7 +32,7 @@ data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
   key_vault_id = data.azurerm_key_vault.secret.id
 }
-provider "azurerm" {
+
   subscription_id = "$(data.azurerm_key_vault_secret.subscriptionID.value)"
   client_id       = "$(data.azurerm_key_vault_secret.id.value)"
   client_secret   = "$(data.azurerm_key_vault_secret.clientS.value)"
