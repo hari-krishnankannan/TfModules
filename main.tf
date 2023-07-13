@@ -5,15 +5,15 @@ data "azuread_application" "sp" {
 
 data "azuread_service_principal" "sp" {
   application_id = data.azuread_application.sp.application_id
-  object_ID    = data.azuread_application.sp.object_id
-  tenant_id   = data.azuread_application.sp.tenant_id
+  object_id    = data.azuread_application.sp.object_id
+  directory_id   = data.azuread_application.sp.tenant_id
 }
 
 provider "azurerm" {
   subscription_id = var.subscription_id
   client_id       = data.azuread_service_principal.sp.application_id
   client_secret   = var.client_secret
-  tenant_id       = data.azuread_service_principal.sp.tenant_id
+  tenant_id       = data.azuread_service_principal.sp.directory_id
 features {}
 }
 resource "azurerm_resource_group" "k8s" {
