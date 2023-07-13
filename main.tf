@@ -5,22 +5,22 @@ data "azurerm_key_vault" "secret"{
 
 data "azurerm_key_vault_secret" "id" {
   name         = "clientid"
-  vault_uri = "https://myscrets.vault.azure.net/"
+  key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 data "azurerm_key_vault_secret" "clientS" {
   name         = "clientsecret"
-  vault_uri = "https://myscrets.vault.azure.net/"
+   key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 data "azurerm_key_vault_secret" "subscriptionID" {
   name         = "subscriptionid"
-  vault_uri = "https://myscrets.vault.azure.net/"
+   key_vault_id = data.azurerm_key_vault.secret.id
 }
 
 data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
-  vault_uri = "https://myscrets.vault.azure.net/"
+  key_vault_id = data.azurerm_key_vault.secret.id
 }
 provider "azurerm" {
   subscription_id = "$(data.azurerm_key_vault_secret.subscriptionID.value)"
