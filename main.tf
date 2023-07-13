@@ -51,13 +51,14 @@ output "tenid" {
 
 value = data.azurerm_key_vault_secret.tenantids.value
 }
-  subscription_id = "$(data.azurerm_key_vault_secret.Subid)"
-  client_id       = "$(data.azurerm_key_vault_secret.clientSecrets)"
-  client_secret   = "$(data.azurerm_key_vault_secret.client)"
-  tenant_id       = "$(data.azurerm_key_vault_secret.tenid)"
+ 
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
   location = var.location
+ subscription_id = "$(data.azurerm_key_vault_secret.Subid)"
+  client_id       = "$(data.azurerm_key_vault_secret.clientSecrets)"
+  client_secret   = "$(data.azurerm_key_vault_secret.client)"
+  tenant_id       = "$(data.azurerm_key_vault_secret.tenid)"
 }
 module "network" {
   source    = "./network"
