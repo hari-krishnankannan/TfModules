@@ -15,7 +15,7 @@ data "azurerm_key_vault_secret" "id" {
   vault_uri = data.azurerm_key_vault.secret.vault_uri
 }
 
-output "client" {
+output "clientid" {
 
 value = data.azurerm_key_vault_secret.id.value
 }
@@ -25,7 +25,7 @@ data "azurerm_key_vault_secret" "clientS" {
    vault_uri = data.azurerm_key_vault.secret.vault_uri
 }
 
-output "clientSecrets" {
+output "clientsecret" {
 
 value = data.azurerm_key_vault_secret.clientS.value
 }
@@ -35,7 +35,7 @@ data "azurerm_key_vault_secret" "subscriptionID" {
    vault_uri = data.azurerm_key_vault.secret.vault_uri
 }
 
-output "Subid" {
+output "subscriptionid" {
 
 value = data.azurerm_key_vault_secret.subscriptionID.value
 }
@@ -44,14 +44,14 @@ data "azurerm_key_vault_secret" "tenantids" {
   name       = "tenantid"
    vault_uri = data.azurerm_key_vault.secret.vault_uri
 }
-output "tenid" {
+output "tenantid" {
 
 value = data.azurerm_key_vault_secret.tenantids.value
 }
-  subscription_id = "$(data.azurerm_key_vault_secret.Subid)"
-  client_id       = "$(data.azurerm_key_vault_secret.client)"
-  client_secret   = "$(data.azurerm_key_vault_secret.clientSecrets)"
-  tenant_id       = "$(data.azurerm_key_vault_secret.tenid)"
+  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionid)"
+  client_id       = "$(data.azurerm_key_vault_secret.clientid)"
+  client_secret   = "$(data.azurerm_key_vault_secret.clientsecret)"
+  tenant_id       = "$(data.azurerm_key_vault_secret.tenantid)"
 
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
