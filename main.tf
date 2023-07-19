@@ -9,37 +9,23 @@ resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
   location = var.location
 }
-resource "azurerm_virtual_network" "k8s" {
-  name                = "k8s-vnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.k8s.location
+module "network" {
+  source    = "./network"
+  vnet_name =   var.vnet_name
+resource_group_name = azurerm_resource_group.k8s.name
+   subnet_address_space    = [var.subnet_address_space]
+  subnet_address_prefixes = [var.subnet_address_prefixes]
+   }
+
+module "aks" {
+  source              = "./aks"
+ client_id     = var.client_id
+ client_secret = var.client_secret
   resource_group_name = azurerm_resource_group.k8s.name
-}
-resource "azurerm_subnet" "k8s" {
-  name                 = "k8s-subnet"
-  resource_group_name  = azurerm_resource_group.k8s.name
-  virtual_network_name = azurerm_virtual_network.k8s.name
-  address_prefixes     = ["10.0.1.0/24"]
-}
-resource "azurerm_kubernetes_cluster" "k8s" {
-  name                = var.clustername
   location            = azurerm_resource_group.k8s.location
-  resource_group_name = azurerm_resource_group.k8s.name
-  dns_prefix          = var.dnspreffix
-default_node_pool {
-    name       = "default"
-    node_count = var.agentnode
-    vm_size    = var.size
-    vnet_subnet_id  = azurerm_subnet.k8s.id
-  }
-network_profile {
-    network_plugin = "azure"
-    network_policy = "azure"
-    service_cidr = "10.0.2.0/24"
-    dns_service_ip = "10.0.2.10"
-  }
-service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
-  }
+  cluster_name        = var.cluster_name
+  vm_size             = var.vm_size
+   vnet_subnet_id     =  module.network.subnet_id
+   service_cidr        = var.service_cidr
+  dns_service_ip      = var.dns_service_ip
 }
