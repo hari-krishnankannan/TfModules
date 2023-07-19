@@ -8,6 +8,31 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: Bash@3
+  displayName: 'Install checkov'
+  inputs:
+    targetType: 'inline'
+    script: 'pip3 install checkov'
+
+- task: Bash@3
+  displayName: 'Checkov Static Code Analysis'
+  inputs:
+    targetType: 'inline'
+    script: |
+       mkdir checkov-report
+       checkov -d . --skip-path ./*.json --check MEDIUM --output        junitxml > $(System.DefaultWorkingDirectory)/checkov-report/checkov-report.xml  
+
+- task: PublishTestResults@2
+  displayName: 'Publish checkov Test Results'
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFile: '**/TEST-*.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)/checkov-report'
+    mergeTestResults: false
+    testRuntitle: CheckOV Scan
+    failTaskOnFailedTests: false
+    publishRunAttachements: true
 - task: TerraformCLI@0
   inputs:
     command: 'init'
