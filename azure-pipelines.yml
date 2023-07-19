@@ -16,7 +16,6 @@ steps:
   inputs:
     version: 'v1.26.0'
     debug: true
-    dir: 'https://github.com/hari-krishnankannan/TfModules.git'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
