@@ -48,7 +48,7 @@ output "tenantid" {
 
 value = data.azurerm_key_vault_secret.tenantids.value
 }
-  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionid
+  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionid)"
   client_id       = "$(data.azurerm_key_vault_secret.clientid)"
   client_secret   = "$(data.azurerm_key_vault_secret.clientsecret)"
   tenant_id       = "$(data.azurerm_key_vault_secret.tenantid)"
