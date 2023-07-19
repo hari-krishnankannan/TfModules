@@ -8,8 +8,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- checkout: self
-- checkout: custom-checks
 - script: |
     echo "Running Checkov Scan!"
     sudo apt-get install software-properties-common
