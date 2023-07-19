@@ -8,31 +8,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Bash@3
-  displayName: 'Install checkov'
-  inputs:
-    targetType: 'inline'
-    script: 'pip3 install checkov'
-
-- task: Bash@3
-  displayName: 'Checkov Static Code Analysis'
-  inputs:
-    targetType: 'inline'
-    script: |
-       mkdir checkov-report
-       checkov -d . --skip-path ./*.json --check MEDIUM --output junitxml > $(System.DefaultWorkingDirectory)/checkov-report/TEST-checkov-report.xml  
-
-- task: PublishTestResults@2
-  displayName: 'Publish checkov Test Results'
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFile: '**/TEST-*.xml'
-    searchFolder: '$(System.DefaultWorkingDirectory)/checkov-report'
-    mergeTestResults: false
-    testRuntitle: CheckOV Scan
-    failTaskOnFailedTests: false
-    publishRunAttachements: true
+- checkout: self
+- checkout: custom-checks
+- script: |
+    echo "Running Checkov Scan!"
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt install python3-pip
+    sudo apt-get install python3-testresources
+    sudo python3.7 -m pip install botocore==1.20.112
+    sudo python3.7 -m pip install -U checkov
+    checkov -d hari-krishnankannan/TfModules --framework terraform --external-checks-dir custom-checks/terraform --skip-check CKV_AZURE_6
+  displayName: 'Terraform code scan using Checkov'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
