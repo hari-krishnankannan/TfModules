@@ -20,14 +20,14 @@ steps:
     targetType: 'inline'
     script: |
        mkdir checkov-report
-       checkov -d . --skip-path ./*.json --check MEDIUM --output        junitxml > $(System.DefaultWorkingDirectory)/checkov-report/checkov-report.xml  
+       checkov -d . --skip-path ./*.json --check MEDIUM --output        junitxml > $(System.DefaultWorkingDirectory)/checkov-report/TEST-checkov-report.xml  
 
 - task: PublishTestResults@2
   displayName: 'Publish checkov Test Results'
   condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFile: '**/checkov-*.xml'
+    testResultsFile: '**/TEST-*.xml'
     searchFolder: '$(System.DefaultWorkingDirectory)/checkov-report'
     mergeTestResults: false
     testRuntitle: CheckOV Scan
