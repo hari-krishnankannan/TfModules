@@ -14,8 +14,7 @@ steps:
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install python3-pip
     sudo apt-get install python3-testresources
-    sudo python3.7 -m pip install botocore==1.20.112
-    sudo python3.7 -m pip install -U checkov
+    sudo pip3 install checkov
     checkov -d hari-krishnankannan/TfModules --framework terraform --external-checks-dir custom-checks/terraform --skip-check CKV_AZURE_6
   displayName: 'Terraform code scan using Checkov'
 - task: TerraformCLI@0
