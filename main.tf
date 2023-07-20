@@ -1,10 +1,58 @@
 provider "azurerm" {
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  tenant_id       = var.tenant_id
-features {}
+
+data "azurerm_key_vault" "secret"{
+  name                = "myscrets"
+  resource_group_name = "Azurevms"
 }
+
+output "vault_uri" {
+
+value = data.azurerm_key_vault.secret.vault_uri
+}
+
+data "azurerm_key_vault_secret" "id" {
+  name         = "clientid"
+  vault_uri = data.azurerm_key_vault.secret.vault_uri
+}
+
+output "clientid" {
+
+value = data.azurerm_key_vault_secret.id.value
+}
+
+data "azurerm_key_vault_secret" "clientS" {
+  name         = "clientsecret"
+   vault_uri = data.azurerm_key_vault.secret.vault_uri
+}
+
+output "clientsecret" {
+
+value = data.azurerm_key_vault_secret.clientS.value
+}
+
+data "azurerm_key_vault_secret" "subscriptionID" {
+  name         = "subscriptionid"
+   vault_uri = data.azurerm_key_vault.secret.vault_uri
+}
+
+output "subscriptionid" {
+
+value = data.azurerm_key_vault_secret.subscriptionID.value
+}
+
+data "azurerm_key_vault_secret" "tenantids" {
+  name       = "tenantid"
+   vault_uri = data.azurerm_key_vault.secret.vault_uri
+}
+output "tenantid" {
+
+value = data.azurerm_key_vault_secret.tenantids.value
+}
+  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionid)"
+  client_id       = "$(data.azurerm_key_vault_secret.clientid)"
+  client_secret   = "$(data.azurerm_key_vault_secret.clientsecret)"
+  tenant_id       = "$(data.azurerm_key_vault_secret.tenantid)"
+
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
   location = var.location
@@ -16,16 +64,4 @@ resource_group_name = azurerm_resource_group.k8s.name
    subnet_address_space    = [var.subnet_address_space]
   subnet_address_prefixes = [var.subnet_address_prefixes]
    }
-
-module "aks" {
-  source              = "./aks"
- client_id     = var.client_id
- client_secret = var.client_secret
-  resource_group_name = azurerm_resource_group.k8s.name
-  location            = azurerm_resource_group.k8s.location
-  cluster_name        = var.cluster_name
-  vm_size             = var.vm_size
-   vnet_subnet_id     =  module.network.subnet_id
-   service_cidr        = var.service_cidr
-  dns_service_ip      = var.dns_service_ip
 }
