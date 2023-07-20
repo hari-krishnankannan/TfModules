@@ -48,10 +48,10 @@ output "tenantid" {
 
 value = data.azurerm_key_vault_secret.tenantids.value
 }
-  subscription_id = "$(data.azurerm_key_vault_secret.subscriptionid)"
+  subscription_id = "$(data.azurerm_key_vault_secret.id.value)"
   client_id       = "$(data.azurerm_key_vault_secret.clientid)"
-  client_secret   = "$(data.azurerm_key_vault_secret.clientsecret)"
-  tenant_id       = "$(data.azurerm_key_vault_secret.tenantid)"
+  client_secret   = "$(data.azurerm_key_vault_secret.clientS.value)"
+  tenant_id       = "$(data.azurerm_key_vault_secret.tenantids.value)"
 
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
