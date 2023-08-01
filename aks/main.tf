@@ -9,14 +9,14 @@ service_principal {
   resource_group_name = var.resource_group_name
   dns_prefix          = var.dnspreffix
 
-role_based_access_control {
-    enabled = true
-  }
 default_node_pool {
     name       = "default"
     node_count = var.agentnode
     vm_size    = var.vm_size
     vnet_subnet_id  = var.vnet_subnet_id
+  }
+role_based_access_control {
+    enabled = true
   }
 network_profile {
     network_plugin = var.network_plugin
